@@ -1,13 +1,14 @@
 import Embed from '../blots/embed';
+import katex from 'katex';
 
 class Formula extends Embed {
   static create(value) {
-    if (window.katex == null) {
+    if (katex == null) {
       throw new Error('Formula module requires KaTeX.');
     }
     const node = super.create(value);
     if (typeof value === 'string') {
-      window.katex.render(value, node, {
+      katex.render(value, node, {
         throwOnError: false,
         errorColor: '#f00',
       });

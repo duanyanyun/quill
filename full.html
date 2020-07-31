@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Full Editor - Quill Rich Text Editor</title>
+    <meta charset="utf-8">
+
+
+    <link rel="stylesheet" href="../quill/dist/quill.snow.css"/>
+
+    <style>
+        body {
+            /*padding: 25px;*/
+
+        }
+
+        body > #standalone-container {
+            margin: 50px auto;
+            max-width: 720px;
+        }
+
+        #editor-container {
+            height: 250px;
+            border: 1px solid red;
+        }
+
+
+
+    </style>
+
+
+</head>
+<body>
+
+<div id="standalone-container">
+    <div id="editor-container"></div>
+
+    <div id="toolbar-container">
+        <span class="ql-formats">
+          <button class="ql-topic"></button>
+          <button class="ql-aiteuser"></button>
+          <button class="ql-emoji"></button>
+          <button class="ql-image"></button>
+        </span>
+    </div>
+
+</div>
+
+<div style=" margin: 50px auto;max-width: 720px;">
+    <div style="margin-bottom: 20px;margin-top: 20px;" id="content_view" ></div>
+    <button id="get_content_but" onclick="getContent()" >获取编辑器内容</button>
+</div>
+
+
+
+<script src="../quill/dist/quill.js"></script>
+
+<script>
+    var quill = new Quill('#editor-container', {
+        searchTopic: function (tooltip, value) {
+            var dom = tooltip.root.querySelector('div.ql-search');
+            for (var i = 0; i < 5; i++) {
+                const contentNode = document.createElement('span');
+                contentNode.innerHTML = value + "--测试话题昵称:" + i;
+                contentNode.setAttribute("style", "color:#1783ff");
+                contentNode.setAttribute("data-topic-id", "" + i);
+                contentNode.addEventListener("click", function () {
+
+
+                    tooltip.saveTopicOrAiteuser(this.getAttribute("data-topic-id"),this.innerHTML);
+                });
+                dom.appendChild(contentNode);
+            }
+
+        },
+        searchUser: function (tooltip, value) {
+            var dom = tooltip.root.querySelector('div.ql-search');
+            for (var i = 0; i < 5; i++) {
+                const contentNode = document.createElement('span');
+                contentNode.innerHTML = value + "--用户昵称:" + i;
+                contentNode.setAttribute("style", "color:#1783ff");
+                contentNode.setAttribute("data-user-id", "" + i);
+                contentNode.addEventListener("click", function () {
+                    tooltip.saveTopicOrAiteuser(this.getAttribute("data-user-id"),this.innerHTML);
+                });
+                dom.appendChild(contentNode);
+            }
+
+        },
+        modules: {
+            toolbar: '#toolbar-container',
+        },
+        placeholder: 'Compose an epic...',
+        theme: 'snow'
+    });
+    
+    function getContent() {
+       var data= quill.getContents();
+       var html="";
+        data.forEach(item=>{
+            if(typeof item.insert==="string"){
+                html+=""+item.insert;
+            }else if(typeof item.insert==="object"){
+                if(item.insert.topic!=undefined){
+                    html+="[url=topic/"+item.insert.topic.topic_id+"]#"+item.insert.topic.topic_name+"#[/url]";
+                }
+                if(item.insert.aiteuser!=undefined){
+                    html+="[url=user/"+item.insert.aiteuser.user_id+"]@"+item.insert.aiteuser.user_name+"[/url]";
+                }
+                if(item.insert.emoji!=undefined){
+                    html+="[img]/emot/"+item.insert.emoji.type+"/"+item.insert.emoji.src+"[/img]";
+                }
+            }
+            window.console.log(item.attributes);
+        });
+        window.console.log(data);
+        document.getElementById("content_view").innerHTML=html;
+        window.console.log(quill.getText(0,quill.getLength()));
+    }
+    
+</script>
+
+
+</body>
+</html>

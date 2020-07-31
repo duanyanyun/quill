@@ -1,9 +1,9 @@
-class Tooltip {
+class Emojitool {
   constructor(quill, boundsContainer) {
 
     this.quill = quill;
     this.boundsContainer = boundsContainer || document.body;
-    this.root = quill.addContainer('ql-tooltip');
+    this.root = quill.addContainer('ql-emojitool');
 
 
 
@@ -54,4 +54,4 @@ class Tooltip {
   }
 }
 
-export default Tooltip;
+export default Emojitool;

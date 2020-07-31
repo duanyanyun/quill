@@ -330,6 +330,7 @@ class Quill {
     );
   }
 
+
   insertText(index, text, name, value, source) {
     let formats;
     // eslint-disable-next-line prefer-const

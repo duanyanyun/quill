@@ -1,6 +1,43 @@
 tooltipMargin = 8px
 
 .ql-snow
+   .ql-emojitool
+     background-color: #fff
+     border: 1px solid borderColor
+     box-shadow: 0px 0px 5px shadowColor
+     color: textColor
+     padding: 5px 12px
+     white-space: nowrap
+     width:300px;
+     &::before
+       content: "表情列表:"
+       line-height: 26px
+       margin-right: tooltipMargin
+       font-weight:700
+     a.ql-cancel
+        margin-left: tooltipMargin*2
+        padding-right: tooltipMargin
+        float:right
+     .ql-emoji-content
+       font-size: 13px
+       margin-top: tooltipMargin
+       margin-bottom: tooltipMargin
+       height:150px
+       margin-left:-40px
+       overflow: hidden
+       overflow-y: scroll
+       li
+        height:25px
+        width:25px
+        list-style:none
+        float:left
+        margin-left:10px
+        margin-bottom:2px
+     .ql-emoji-content::after
+        content:''
+        clear:both
+
+
   .ql-tooltip
     background-color: #fff
     border: 1px solid borderColor
@@ -9,7 +46,7 @@ tooltipMargin = 8px
     padding: 5px 12px
     white-space: nowrap
     &::before
-      content: "Visit URL:"
+      content: "输入连接地址:"
       line-height: 26px
       margin-right: tooltipMargin
     input[type=text]
@@ -26,9 +63,11 @@ tooltipMargin = 8px
       overflow-x: hidden
       text-overflow: ellipsis
       vertical-align: top
-    a.ql-action::after
+    a.ql-action
       border-right: 1px solid borderColor
-      content: 'Edit'
+      margin-left: tooltipMargin*2
+      padding-right: tooltipMargin
+    a.ql-cancel
       margin-left: tooltipMargin*2
       padding-right: tooltipMargin
     a.ql-remove::before
@@ -41,13 +80,24 @@ tooltipMargin = 8px
       display: none
     input[type=text]
       display: inline-block
-    a.ql-action::after
+    a.ql-action
       border-right: 0px
-      content: 'Save'
       padding-right: 0px
   .ql-tooltip[data-mode=link]::before
     content: "Enter link:"
   .ql-tooltip[data-mode=formula]::before
-    content: "Enter formula:"
+    content: "请输入公式:"
   .ql-tooltip[data-mode=video]::before
-    content: "Enter video:"
+    content: "输入视频地址:"
+  .ql-tooltip[data-mode=topic]::before
+        content: "搜索话题:"
+  .ql-tooltip[data-mode=aiteuser]::before
+        content: "搜索用户:"
+  .ql-search
+      font-size: 13px
+      margin-top: tooltipMargin
+      margin-bottom: tooltipMargin
+      span
+         padding-left: 20px;
+         display: block;
+         margin-top: 5px;

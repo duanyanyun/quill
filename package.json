@@ -33,6 +33,8 @@
   },
   "dependencies": {
     "eventemitter3": "^4.0.0",
+    "highlight": "^0.2.4",
+    "katex": "^0.12.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.isequal": "^4.5.0",
     "lodash.merge": "^4.5.0",
